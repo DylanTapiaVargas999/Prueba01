@@ -1,24 +1,21 @@
 <?php
-// Obtener el directorio actual del archivo Load.php
 $currentDir = __DIR__;
-
-// Construir la ruta al archivo del controlador
 $controllerFile = $currentDir . '/../Controller/' . $controller . '.php';
+$errorFile = $currentDir . '/../Controller/Error.php';
 
-// Verificar si el archivo del controlador existe
+echo "Attempting to load controller file: $controllerFile\n";
+echo "Attempting to load error file: $errorFile\n";
+
 if (file_exists($controllerFile)) {
     require_once($controllerFile);
     $controller = new $controller();
     
-    // Verificar si el método existe en el controlador
     if (method_exists($controller, $methop)) {
         $controller->{$methop}($params);
     } else {
-        // Construir la ruta correcta a Error.php
-        require_once($currentDir . '/../Controller/Error.php');
+        require_once($errorFile);
     }
 } else {
-    // Construir la ruta correcta a Error.php
-    require_once($currentDir . '/../Controller/Error.php');
+    require_once($errorFile);
 }
 ?>
