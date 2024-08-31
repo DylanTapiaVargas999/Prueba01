@@ -21,16 +21,5 @@ jobs:
         with:
           php-version: '8.1'
 
-      - name: Install Dependencies
-        run: composer install
-
       - name: Run PHP Script
         run: php main.php
-
-      - name: Cache Composer Dependencies
-        uses: actions/cache@v3
-        with:
-          path: vendor/
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
