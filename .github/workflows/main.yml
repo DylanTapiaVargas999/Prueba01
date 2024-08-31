@@ -21,5 +21,11 @@ jobs:
         with:
           php-version: '8.1'
 
+      - name: List files in biblioteca directory
+        run: ls -la biblioteca
+
+      - name: List files in Controller directory
+        run: ls -la biblioteca/Controller
+
       - name: Run PHP Script
         run: php biblioteca/index.php
