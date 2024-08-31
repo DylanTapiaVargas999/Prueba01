@@ -27,5 +27,8 @@ jobs:
       - name: List files in Controller directory
         run: ls -la biblioteca/Controller
 
+      - name: Display content of Load.php
+        run: cat biblioteca/Libraries/Core/Load.php
+
       - name: Run PHP Script
         run: php biblioteca/index.php
