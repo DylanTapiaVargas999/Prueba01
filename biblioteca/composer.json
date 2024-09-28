@@ -15,5 +15,27 @@
     "minimum-stability": "stable",
     "require-dev": {
         "phpunit/phpunit": "^11.3"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "publishConfig": {
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DylanTapiaVargas999/Prueba01.git"
     }
+}
+
 }
