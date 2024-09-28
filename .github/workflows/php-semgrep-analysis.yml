@@ -1,0 +1,41 @@
+name: PHP Security Analysis with Semgrep
+
+on: push
+
+jobs:
+  semgrep-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install Semgrep
+      - name: Install Semgrep
+        run: |
+          pip install semgrep
+
+      # Create reports directory if it doesn't exist
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      # Run Semgrep analysis and generate report
+      - name: Run Semgrep
+        run: |
+          semgrep --config=p/security-audit --config=p/php --sarif --output="reports/semgrep-report.sarif"
+
+      # Upload the Semgrep report as an artifact
+      - name: Upload Semgrep report
+        uses: actions/upload-artifact@v3
+        with:
+          name: semgrep-report
+          path: "reports/semgrep-report.sarif"
+          
+      # Commit and push the report
+     # - name: Commit and push the report
+      #  run: |
+       #   git config --local user.name "github-actions"
+        #  git config --local user.email "github-actions@github.com"
+         # git add reports/semgrep-report.sarif
+          #git commit -m "Add Semgrep report"
+          #git push
