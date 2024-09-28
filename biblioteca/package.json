@@ -11,4 +11,8 @@
   "author": "",
   "license": "ISC",
   "description": ""
+  ,
+  "publishConfig": {
+  "@DylanTapiaVargas999:registry": "https://npm.pkg.github.com"
+}
 }

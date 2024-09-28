@@ -1,4 +1,4 @@
-name: PHP Package
+name: Node.js Package
 
 on:
   release:
@@ -8,40 +8,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          php-version: '8.2' # Cambia según tu versión PHP
+          node-version: 16
+      - run: npm ci
+      - run: npm test
 
-      - name: Install Dependencies
-        run: composer install --prefer-dist
-
-      - name: Run Tests
-        run: vendor/bin/phpunit # Cambia según tu comando de prueba
-
-  publish:
+  publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          php-version: '8.2' # Cambia según tu versión PHP
-          registry-url: https://PACKAGIST_URL
-
-      - name: Install Dependencies
-        run: composer install --prefer-dist
-
-      - name: Publish Package
-        run: composer publish
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
